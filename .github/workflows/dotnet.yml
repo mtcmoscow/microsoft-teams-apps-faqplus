@@ -9,7 +9,9 @@ on:
 env:
   solution_path: "./Source/Microsoft.Teams.Apps.FAQPlusPlus.sln"
   faqpluplus_path: "./Source/Microsoft.Teams.Apps.FAQPlusPlus/Microsoft.Teams.Apps.FAQPlusPlus.csproj"    
-  azurefunc_path: "./Source/Microsoft.Teams.Apps.FAQPlusPlus.AzureFunction/Microsoft.Teams.Apps.FAQPlusPlus.AzureFunction.csproj"  
+  azurefunc_path: "./Source/Microsoft.Teams.Apps.FAQPlusPlus.AzureFunction/Microsoft.Teams.Apps.FAQPlusPlus.AzureFunction.csproj"
+  FAQPlusPlusFuncpublish_path: "/home/runner/work/microsoft-teams-apps-faqplus/microsoft-teams-apps-faqplus/Source/Microsoft.Teams.Apps.FAQPlusPlus.AzureFunction/bin/Release/netcoreapp2.1/publish"
+  FAQPlusPluspublish_path: "/home/runner/work/microsoft-teams-apps-faqplus/microsoft-teams-apps-faqplus/Source/Microsoft.Teams.Apps.FAQPlusPlus/bin/Release/netcoreapp2.1/publish"
 jobs:
   build_faqplusplusfunc:
     runs-on: ubuntu-latest
