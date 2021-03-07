@@ -30,7 +30,7 @@ jobs:
     
      - uses: actions/upload-artifact@v2
        with:
-        name: FAQPlusPlus
+        name: FAQPlusPlusFunc
         path: ${{env.FAQPlusPlusFuncpublish_path}}
      
   build_faqpluplus:
