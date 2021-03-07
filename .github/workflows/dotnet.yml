@@ -33,34 +33,11 @@ jobs:
         name: FAQPlusPlus
         path: ${{env.FAQPlusPlusFuncpublish_path}}
 
-     - name: Build project # This would actually build your project, using zip for an example artifact
+     - name: Zip project
        run: |
         cd $FAQPlusPlusFuncpublish_path/ && zip -r FAQPlusPlusFunc.zip *
         
-     - name: Create Release
-       id: create_release
-       uses: actions/create-release@v1
-       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-       with:
-        tag_name: ${{ github.event.inputs.relName }}
-        release_name: Release ${{ github.event.inputs.relName }}
-        draft: false
-        prerelease: false
-    
-     - name: Upload Release Asset
-       id: upload-release-asset 
-       uses: actions/upload-release-asset@v1
-       env:
-         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-       with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-        asset_path: ${{env.FAQPlusPlusFuncpublish_path}}/FAQPlusPlusFunc.zip
-        asset_name: FAQPlusPlusFunc.zip
-        asset_content_type: application/zip
-
-
-
+     
   build_faqpluplus:
     runs-on: ubuntu-latest
     needs: build_faqplusplusfunc
@@ -84,9 +61,33 @@ jobs:
    
     - name: Build project # This would actually build your project, using zip for an example artifact
       run: |
-        cd $FAQPlusPluspublish_path/ && zip -r FAQPlusPlus.zip *        
+        cd $FAQPlusPluspublish_path/ && zip -r FAQPlusPlus.zip *            
     
-    - name: Upload Release Asset
+
+  upload_relrase:
+    - name: Create Release
+       id: create_release
+       uses: actions/create-release@v1
+       env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+       with:
+        tag_name: ${{ github.event.inputs.relName }}
+        release_name: Release ${{ github.event.inputs.relName }}
+        draft: false
+        prerelease: false
+    
+     - name: Upload FAQPlusPlusFunc Release Asset
+       id: upload-release-asset 
+       uses: actions/upload-release-asset@v1
+       env:
+         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+       with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+        asset_path: ${{env.FAQPlusPlusFuncpublish_path}}/FAQPlusPlusFunc.zip
+        asset_name: FAQPlusPlusFunc.zip
+        asset_content_type: application/zip
+
+     - name: Upload FAQPlusPlus Release Asset
       id: upload-release-asset 
       uses: actions/upload-release-asset@v1
       env:
@@ -95,6 +96,5 @@ jobs:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
           asset_path: ${{env.FAQPlusPluspublish_path}}/FAQPlusPlus.zip
           asset_name: FAQPlusPlus.zip
-          asset_content_type: application/zip
-
-
+          asset_content_type: application/zip 
+    
