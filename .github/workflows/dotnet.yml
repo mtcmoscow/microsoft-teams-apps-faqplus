@@ -13,7 +13,7 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 2.1.x
+        dotnet-version: 2.1.515
     - name: Restore dependencies
       run: dotnet restore ./Source/Microsoft.Teams.Apps.FAQPlusPlus/Microsoft.Teams.Apps.FAQPlusPlus.csproj
     - name: Build
