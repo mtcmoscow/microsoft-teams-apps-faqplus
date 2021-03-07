@@ -14,7 +14,7 @@ env:
   FAQPlusPlusFuncpublish_path: "/home/runner/work/microsoft-teams-apps-faqplus/microsoft-teams-apps-faqplus/Source/Microsoft.Teams.Apps.FAQPlusPlus.AzureFunction/bin/Release/netcoreapp2.1/publish"
 jobs:
   build_faqplusplusfunc:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
      - uses: actions/checkout@v2
      - name: Setup .NET
@@ -62,7 +62,7 @@ jobs:
 
 
   build_faqpluplus:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - name: Setup .NET
