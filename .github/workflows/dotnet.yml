@@ -24,7 +24,7 @@ jobs:
     - name: Build
       run: dotnet build "${{env.faqpluplus_path}}" --no-restore --configuration Release
     - name: Publish
-      run: dotnet publish "${{env.faqpluplus_path}}" --configuration Release --no-restore --no-build --output distr
+      run: dotnet publish "${{env.faqpluplus_path}}" --configuration Release --no-restore --no-build --output ./distr
     
     - uses: actions/upload-artifact@v2
       with:
