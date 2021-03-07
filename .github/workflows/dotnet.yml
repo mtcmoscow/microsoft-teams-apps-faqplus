@@ -73,7 +73,8 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: FAQPlusPlusFunc
-        run: |
+    - shell: bash    
+      run: |
           cd ./ && zip -r FAQPlusPlusFunc.zip *
     
     - name: Upload FAQPlusPlusFunc Release Asset
