@@ -28,7 +28,8 @@ jobs:
    
     - name: Build project # This would actually build your project, using zip for an example artifact
       run: |
-        zip --junk-paths FAQPlusPlus README.md
+        cd /home/runner/work/microsoft-teams-apps-faqplus/microsoft-teams-apps-faqplus/Source/Microsoft.Teams.Apps.FAQPlusPlus/bin/Release/netcoreapp2.1/publish/ zip -r FAQPlusPlus.zip
+        
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
