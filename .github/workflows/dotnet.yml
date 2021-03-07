@@ -8,10 +8,8 @@ on:
         required: true
 env:
   solution_path: "./Source/Microsoft.Teams.Apps.FAQPlusPlus.sln"
-  faqpluplus_path: "./Source/Microsoft.Teams.Apps.FAQPlusPlus/Microsoft.Teams.Apps.FAQPlusPlus.csproj"  
-  FAQPlusPluspublish_path: "/home/runner/work/microsoft-teams-apps-faqplus/microsoft-teams-apps-faqplus/Source/Microsoft.Teams.Apps.FAQPlusPlus/bin/Release/netcoreapp2.1/publish"
-  azurefunc_path: "./Source/Microsoft.Teams.Apps.FAQPlusPlus.AzureFunction/Microsoft.Teams.Apps.FAQPlusPlus.AzureFunction.csproj"
-  FAQPlusPlusFuncpublish_path: "/home/runner/work/microsoft-teams-apps-faqplus/microsoft-teams-apps-faqplus/Source/Microsoft.Teams.Apps.FAQPlusPlus.AzureFunction/bin/Release/netcoreapp2.1/publish"
+  faqpluplus_path: "./Source/Microsoft.Teams.Apps.FAQPlusPlus/Microsoft.Teams.Apps.FAQPlusPlus.csproj"    
+  azurefunc_path: "./Source/Microsoft.Teams.Apps.FAQPlusPlus.AzureFunction/Microsoft.Teams.Apps.FAQPlusPlus.AzureFunction.csproj"  
 jobs:
   build_faqplusplusfunc:
     runs-on: ubuntu-latest
@@ -93,8 +91,10 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: FAQPlusPlus
-        run: |
-          cd ./ && zip -r FAQPlusPlus.zip *
+        path: ~/download/FAQPlusPlus
+    - shell: bash    
+      run: |
+          cd ~/download/FAQPlusPlus/ && zip -r FAQPlusPlus.zip *
         
     - name: Upload FAQPlusPlus Release Asset
       id: upload-release-asset2 
@@ -103,7 +103,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-          asset_path: FAQPlusPlus.zip
+          asset_path: /home/runner/download/FAQPlusPlus/FAQPlusPlus.zip
           asset_name: FAQPlusPlus.zip
           asset_content_type: application/zip 
     
