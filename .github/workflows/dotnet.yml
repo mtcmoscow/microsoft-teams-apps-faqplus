@@ -69,9 +69,12 @@ jobs:
         draft: false
         prerelease: false
     
-    - name: Zip FAQPlusPlusFun project
-      run: |
-       cd $FAQPlusPlusFuncpublish_path/ && zip -r FAQPlusPlusFunc.zip *
+    - name: Download FAQPlusPlusFunc
+      uses: actions/download-artifact@v2
+      with:
+        name: FAQPlusPlusFunc
+        run: |
+          cd ./ && zip -r FAQPlusPlusFunc.zip *
     
     - name: Upload FAQPlusPlusFunc Release Asset
       id: upload-release-asset 
@@ -84,9 +87,12 @@ jobs:
         asset_name: FAQPlusPlusFunc.zip
         asset_content_type: application/zip
 
-    - name: Zip project # This would actually build your project, using zip for an example artifact
-      run: |
-        cd $FAQPlusPluspublish_path/ && zip -r FAQPlusPlus.zip * 
+    - name: Download FAQPlusPlus
+      uses: actions/download-artifact@v2
+      with:
+        name: FAQPlusPlus
+        run: |
+          cd ./ && zip -r FAQPlusPlus.zip *
         
     - name: Upload FAQPlusPlus Release Asset
       id: upload-release-asset2 
