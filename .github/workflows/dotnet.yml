@@ -6,12 +6,13 @@ on:
       relName:
         description: 'Release Name'
         required: true
-
+env:
+  solution_path: "./Source/Microsoft.Teams.Apps.FAQPlusPlus.sln"
+  faqpluplus_path: "./Source/Microsoft.Teams.Apps.FAQPlusPlus/Microsoft.Teams.Apps.FAQPlusPlus.csproj"
+  artifacts_path: "/home/runner/work/microsoft-teams-apps-faqplus/microsoft-teams-apps-faqplus/Source/Microsoft.Teams.Apps.FAQPlusPlus/bin/Release/netcoreapp2.1/publish"
 jobs:
-  build:
-
+  build_faqpluplus_path:
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
     - name: Setup .NET
@@ -19,20 +20,20 @@ jobs:
       with:
         dotnet-version: 2.1.515
     - name: Restore dependencies
-      run: dotnet restore ./Source/Microsoft.Teams.Apps.FAQPlusPlus/Microsoft.Teams.Apps.FAQPlusPlus.csproj
+      run: dotnet restore "${{env.faqpluplus_path}}"
     - name: Build
-      run: dotnet build ./Source/Microsoft.Teams.Apps.FAQPlusPlus/Microsoft.Teams.Apps.FAQPlusPlus.csproj --no-restore --configuration Release
+      run: dotnet build "${{env.faqpluplus_path}}" --no-restore --configuration Release
     - name: Publish
-      run: dotnet publish ./Source/Microsoft.Teams.Apps.FAQPlusPlus/Microsoft.Teams.Apps.FAQPlusPlus.csproj --configuration Release --no-restore --no-build
+      run: dotnet publish "${{env.faqpluplus_path}}" --configuration Release --no-restore --no-build
     
     - uses: actions/upload-artifact@v2
       with:
         name: FAQPlusPlus
-        path: /home/runner/work/microsoft-teams-apps-faqplus/microsoft-teams-apps-faqplus/Source/Microsoft.Teams.Apps.FAQPlusPlus/bin/Release/netcoreapp2.1/publish/
+        path: ${{env.artifacts_path}}
    
     - name: Build project # This would actually build your project, using zip for an example artifact
       run: |
-        cd /home/runner/work/microsoft-teams-apps-faqplus/microsoft-teams-apps-faqplus/Source/Microsoft.Teams.Apps.FAQPlusPlus/bin/Release/netcoreapp2.1/publish/ && zip -r FAQPlusPlus.zip *
+        cd $artifacts_path && zip -r FAQPlusPlus.zip *
         
     - name: Create Release
       id: create_release
@@ -52,7 +53,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-          asset_path: /home/runner/work/microsoft-teams-apps-faqplus/microsoft-teams-apps-faqplus/Source/Microsoft.Teams.Apps.FAQPlusPlus/bin/Release/netcoreapp2.1/publish/FAQPlusPlus.zip
+          asset_path: $assets_path/FAQPlusPlus.zip
           asset_name: FAQPlusPlus.zip
           asset_content_type: application/zip
 
