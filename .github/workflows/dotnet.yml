@@ -1,7 +1,11 @@
 name: .NET
 
 on:
-  workflow_dispatch
+  workflow_dispatch:
+    inputs:
+      relName:
+        description: 'Release Name'
+        required: true
 
 jobs:
   build:
@@ -36,8 +40,8 @@ jobs:
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
+          tag_name: ${{ github.event.inputs.relName }}
+          release_name: Release ${{ github.event.inputs.relName }}
           draft: false
           prerelease: false
     
