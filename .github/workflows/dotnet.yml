@@ -17,5 +17,7 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore ./Source/Microsoft.Teams.Apps.FAQPlusPlus/Microsoft.Teams.Apps.FAQPlusPlus.csproj
     - name: Build
-      run: dotnet build ./Source/Microsoft.Teams.Apps.FAQPlusPlus/Microsoft.Teams.Apps.FAQPlusPlus.csproj --no-restore
+      run: dotnet build ./Source/Microsoft.Teams.Apps.FAQPlusPlus/Microsoft.Teams.Apps.FAQPlusPlus.csproj --no-restore --configuration Release
+    - name: Build
+      run: dotnet build ./Source/Microsoft.Teams.Apps.FAQPlusPlus/Microsoft.Teams.Apps.FAQPlusPlus.csproj --no-restore --configuration Release
    
