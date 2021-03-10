@@ -56,7 +56,7 @@ jobs:
   
   
   build_faqpluspusconfig: 
-    runs-on: windows-latest 
+    runs-on: windows-2016 
     steps:
     - uses: actions/checkout@v2
       name: Checkout Code
@@ -67,7 +67,7 @@ jobs:
     
     - name: Build and Publish Web App     
       run: | 
-        cd "C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\MSBuild\15.0\Bin\" 
+        cd "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\MSBuild\15.0\Bin\" 
         .\MSBuild.exe $Env:GITHUB_WORKSPACE\Source\Microsoft.Teams.Apps.FaqPlusPlus.Configuration\Microsoft.Teams.Apps.FaqPlusPlus.Configuration.csproj /nologo /verbosity:m /t:Build /p:AutoParameterizationWebConfigConnectionStrings=false; /p:Configuration=Release; /p:UseSharedCompilation=false 
     - name: Upload Artifact
       uses: actions/upload-artifact@v1.0.0
