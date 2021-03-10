@@ -63,8 +63,10 @@ jobs:
      
     - name: Add msbuild to PATH
       uses: microsoft/setup-msbuild@v1.0.2
+    
     - name: nuget restore
-      run: nuget restore $Env:GITHUB_WORKSPACE\Source\Microsoft.Teams.Apps.FaqPlusPlus.Configuration\Microsoft.Teams.Apps.FaqPlusPlus.Configuration.csproj
+      run: nuget restore $Env:GITHUB_WORKSPACE\Source\Microsoft.Teams.Apps.FaqPlusPlus.Configuration\Microsoft.Teams.Apps.FaqPlusPlus.Configuration.csproj -MSBuidPath ./
+    
     - name: Build and Publish Web App
       run: msbuild $Env:GITHUB_WORKSPACE\Source\Microsoft.Teams.Apps.FaqPlusPlus.Configuration\Microsoft.Teams.Apps.FaqPlusPlus.Configuration.csproj /p:Configuration=Release /p:DeployOnBuild=true /p:PublishProfile=FolderProfile
  
