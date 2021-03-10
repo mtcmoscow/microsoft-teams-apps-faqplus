@@ -63,6 +63,8 @@ jobs:
      
     - name: Add msbuild to PATH
       uses: microsoft/setup-msbuild@v1.0.2
+      with:
+        vs-version: '15.0'
     
     - name: nuget restore
       run: nuget restore $Env:GITHUB_WORKSPACE\Source\Microsoft.Teams.Apps.FAQPlusPlus.sln 
