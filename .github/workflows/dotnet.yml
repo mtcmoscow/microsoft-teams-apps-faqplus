@@ -52,7 +52,17 @@ jobs:
       with:
         name: FAQPlusPlus
         path: ${{env.FAQPlusPluspublish_path}}
-    
+  
+  build_faqpluplusconfig:
+    runs-on: windows-latest    
+    steps:
+      - name: Add msbuild to PATH
+        uses: microsoft/setup-msbuild@v1.0.2
+        with:
+          vs-version: '15.0'
+      - name: Build with MSBuid 15.0
+        shell: cmd 
+        run: msbuild "./Source/Microsoft.Teams.Apps.FaqPlusPlus.Configuration/Microsoft.Teams.Apps.FaqPlusPlus.Configuration.csproj" 
 
   upload_builds:
     needs: [build_faqplusplusfunc, build_faqpluplus]
