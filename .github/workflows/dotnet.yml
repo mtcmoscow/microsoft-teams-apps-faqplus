@@ -55,8 +55,7 @@ jobs:
   
   build_faqpluplusconfig:
     runs-on: windows-latest
-    steps:
-      - name: checkout
+    steps:      
       - uses: actions/checkout@v2
       - name: Build with MSBuild
         run: | 
