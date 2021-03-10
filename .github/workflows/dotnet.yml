@@ -65,7 +65,7 @@ jobs:
       uses: microsoft/setup-msbuild@v1.0.2
     
     - name: nuget restore
-      run: nuget restore $Env:GITHUB_WORKSPACE\Source\Microsoft.Teams.Apps.FaqPlusPlus.Configuration\Microsoft.Teams.Apps.FaqPlusPlus.Configuration.csproj -MSBuidPath ./
+      run: nuget restore $Env:GITHUB_WORKSPACE\Source\Microsoft.Teams.Apps.FAQPlusPlus.sln -MSBuidPath ./
     
     - name: Build and Publish Web App
       run: msbuild $Env:GITHUB_WORKSPACE\Source\Microsoft.Teams.Apps.FaqPlusPlus.Configuration\Microsoft.Teams.Apps.FaqPlusPlus.Configuration.csproj /p:Configuration=Release /p:DeployOnBuild=true /p:PublishProfile=FolderProfile
