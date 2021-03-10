@@ -69,11 +69,12 @@ jobs:
       run: | 
         cd "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\MSBuild\15.0\Bin\" 
         .\MSBuild.exe $Env:GITHUB_WORKSPACE\Source\Microsoft.Teams.Apps.FaqPlusPlus.Configuration\Microsoft.Teams.Apps.FaqPlusPlus.Configuration.csproj 
+    
     - name: Upload Artifact
-      uses: actions/upload-artifact@v1.0.0
+      uses: actions/upload-artifact@v2
       with:
         name: faqpluplusconfig
-        path: bin\Release\Publish
+        path: bin\
 
   upload_builds:
     needs: [build_faqplusplusfunc, build_faqpluplus, build_faqpluspusconfig]
