@@ -65,9 +65,8 @@ jobs:
     - name: nuget restore
       run: nuget restore $Env:GITHUB_WORKSPACE\Source\Microsoft.Teams.Apps.FAQPlusPlus.sln 
     
-    - name: Build and Publish Web App  
-      shell: cmd
-      run: MSBuild $Env:GITHUB_WORKSPACE\Source\Microsoft.Teams.Apps.FaqPlusPlus.Configuration\Microsoft.Teams.Apps.FaqPlusPlus.Configuration.csproj /t:Build /t:pipelinePreDeployCopyAllFilesToOneFolder /p:Configuration=Release 
+    - name: Build and Publish Web App        
+      run: msbuild $Env:GITHUB_WORKSPACE\Source\Microsoft.Teams.Apps.FaqPlusPlus.Configuration\Microsoft.Teams.Apps.FaqPlusPlus.Configuration.csproj /t:Build /t:pipelinePreDeployCopyAllFilesToOneFolder /p:Configuration=Release 
     
     - name: Upload Artifact
       uses: actions/upload-artifact@v2
