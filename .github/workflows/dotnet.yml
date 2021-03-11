@@ -68,9 +68,7 @@ jobs:
     - name: Build and Publish Web App        
       shell: cmd
       run: |
-        cd "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\MSBuild\15.0\Bin\"
-        dir 
-        .\MSBuild.exe $Env:GITHUB_WORKSPACE\Source\Microsoft.Teams.Apps.FaqPlusPlus.Configuration\Microsoft.Teams.Apps.FaqPlusPlus.Configuration.csproj /t:Build /t:pipelinePreDeployCopyAllFilesToOneFolder /p:Configuration=Release 
+        "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\MSBuild\15.0\Bin\MSBuild.exe" $Env:GITHUB_WORKSPACE\Source\Microsoft.Teams.Apps.FaqPlusPlus.Configuration\Microsoft.Teams.Apps.FaqPlusPlus.Configuration.csproj /t:Build /t:pipelinePreDeployCopyAllFilesToOneFolder /p:Configuration=Release 
     
     - name: Upload Artifact
       uses: actions/upload-artifact@v2
